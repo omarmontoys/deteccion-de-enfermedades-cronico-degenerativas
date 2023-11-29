@@ -345,201 +345,201 @@ print("R^2 Score:", r2_diabe)
 
 #-----------------------------------------------------------------------------------
 
-# Crear un modelo de KNN
-knn_hiper = KNeighborsClassifier(n_neighbors=5)  # Puedes ajustar el número de vecinos según sea necesario
+# # Crear un modelo de KNN
+# knn_hiper = KNeighborsClassifier(n_neighbors=5)  # Puedes ajustar el número de vecinos según sea necesario
 
-# Entrenar el modelo con los datos de entrenamiento
-knn_hiper.fit(X_train_scaled_hiper, y_train_hiper)
+# # Entrenar el modelo con los datos de entrenamiento
+# knn_hiper.fit(X_train_scaled_hiper, y_train_hiper)
 
-# Realizar predicciones en el conjunto de prueba
-y_pred_hiper_knn = knn_hiper.predict(X_test_scaled_hiper)
-y_prob_hiper_knn = knn_hiper.predict_proba(X_test_scaled_hiper)[:, 1]  # Probabilidad de clase positiva
+# # Realizar predicciones en el conjunto de prueba
+# y_pred_hiper_knn = knn_hiper.predict(X_test_scaled_hiper)
+# y_prob_hiper_knn = knn_hiper.predict_proba(X_test_scaled_hiper)[:, 1]  # Probabilidad de clase positiva
 
-# Evaluar el rendimiento del modelo
-accuracy_hiper_knn = accuracy_score(y_test_hiper, y_pred_hiper_knn)
-precision_hiper_knn = precision_score(y_test_hiper, y_pred_hiper_knn)
-recall_hiper_knn = recall_score(y_test_hiper, y_pred_hiper_knn)
-roc_auc_hiper_knn = roc_auc_score(y_test_hiper, y_pred_hiper_knn)
+# # Evaluar el rendimiento del modelo
+# accuracy_hiper_knn = accuracy_score(y_test_hiper, y_pred_hiper_knn)
+# precision_hiper_knn = precision_score(y_test_hiper, y_pred_hiper_knn)
+# recall_hiper_knn = recall_score(y_test_hiper, y_pred_hiper_knn)
+# roc_auc_hiper_knn = roc_auc_score(y_test_hiper, y_pred_hiper_knn)
 
-print("Rendimiento del modelo KNN para hipertensión:")
-print("Accuracy:", accuracy_hiper_knn)
-print("Precision:", precision_hiper_knn)
-print("Recall:", recall_hiper_knn)
-print("ROC AUC:", roc_auc_hiper_knn)
+# print("Rendimiento del modelo KNN para hipertensión:")
+# print("Accuracy:", accuracy_hiper_knn)
+# print("Precision:", precision_hiper_knn)
+# print("Recall:", recall_hiper_knn)
+# print("ROC AUC:", roc_auc_hiper_knn)
 
-# Visualizar la curva ROC
-fpr, tpr, _ = roc_curve(y_test_hiper, y_prob_hiper_knn)
-plt.figure(figsize=(8, 6))
-plt.plot(fpr, tpr, color='darkorange', lw=2, label='Curva ROC')
-plt.plot([1, 1], [1, 1], color='navy', lw=2, linestyle='--')
-plt.xlabel('Tasa de Falsos Positivos')
-plt.ylabel('Tasa de Verdaderos Positivos')
-plt.title('Curva ROC para KNN (hipertensión)')
-plt.legend(loc='lower right')
-plt.show()
+# # Visualizar la curva ROC
+# fpr, tpr, _ = roc_curve(y_test_hiper, y_prob_hiper_knn)
+# plt.figure(figsize=(8, 6))
+# plt.plot(fpr, tpr, color='darkorange', lw=2, label='Curva ROC')
+# plt.plot([1, 1], [1, 1], color='navy', lw=2, linestyle='--')
+# plt.xlabel('Tasa de Falsos Positivos')
+# plt.ylabel('Tasa de Verdaderos Positivos')
+# plt.title('Curva ROC para KNN (hipertensión)')
+# plt.legend(loc='lower right')
+# plt.show()
 
-
-#-----------------------------------------------------------------------------------
-
-# Crear y entrenar el modelo KNN para diabetes
-knn_diabe = KNeighborsClassifier(n_neighbors=5)  # Puedes ajustar el número de vecinos según sea necesario
-knn_diabe.fit(X_train_scaled_diabe, y_train_Diabe)
-
-# Realizar predicciones y evaluar el rendimiento para diabetes
-y_pred_diabe_knn = knn_diabe.predict(X_test_scaled_diabe)
-y_prob_diabe_knn = knn_diabe.predict_proba(X_test_scaled_diabe)[:, 1]  # Probabilidad de clase positiva
-
-accuracy_diabe_knn = accuracy_score(y_test_Diabe, y_pred_diabe_knn)
-precision_diabe_knn = precision_score(y_test_Diabe, y_pred_diabe_knn)
-recall_diabe_knn = recall_score(y_test_Diabe, y_pred_diabe_knn)
-roc_auc_diabe_knn = roc_auc_score(y_test_Diabe, y_pred_diabe_knn)
-
-print("Rendimiento del modelo KNN para diabetes:")
-print("Accuracy:", accuracy_diabe_knn)
-print("Precision:", precision_diabe_knn)
-print("Recall:", recall_diabe_knn)
-print("ROC AUC:", roc_auc_diabe_knn)
-
-# Visualizar la curva ROC
-fpr, tpr, _ = roc_curve(y_test_Diabe, y_prob_diabe_knn)
-plt.figure(figsize=(8, 6))
-plt.plot(fpr, tpr, color='darkorange', lw=2, label='Curva ROC')
-plt.plot([1, 1], [1, 1], color='navy', lw=2, linestyle='--')
-plt.xlabel('Tasa de Falsos Positivos')
-plt.ylabel('Tasa de Verdaderos Positivos')
-plt.title('Curva ROC para KNN (diabetes)')
-plt.legend(loc='lower right')
-plt.show()
-
-#-----------------------------------------------------------------------------------
-# Crear un modelo de SVM
-svm_hiper = SVC(kernel='linear', probability=True)  # Puedes ajustar el kernel según sea necesario
-
-# Entrenar el modelo con los datos de entrenamiento escalados
-svm_hiper.fit(X_train_scaled_hiper, y_train_hiper)
-
-# Realizar predicciones en el conjunto de prueba
-y_pred_hiper_svm = svm_hiper.predict(X_test_scaled_hiper)
-y_prob_hiper_svm = svm_hiper.predict_proba(X_test_scaled_hiper)[:, 1]  # Probabilidad de clase positiva
-
-# Evaluar el rendimiento del modelo
-accuracy_hiper_svm = accuracy_score(y_test_hiper, y_pred_hiper_svm)
-precision_hiper_svm = precision_score(y_test_hiper, y_pred_hiper_svm)
-recall_hiper_svm = recall_score(y_test_hiper, y_pred_hiper_svm)
-roc_auc_hiper_svm = roc_auc_score(y_test_hiper, y_pred_hiper_svm)
-
-print("Rendimiento del modelo SVM para hipertensión:")
-print("Accuracy:", accuracy_hiper_svm)
-print("Precision:", precision_hiper_svm)
-print("Recall:", recall_hiper_svm)
-print("ROC AUC:", roc_auc_hiper_svm)
-
-# Visualizar la curva ROC
-fpr, tpr, _ = roc_curve(y_test_hiper, y_prob_hiper_svm)
-plt.figure(figsize=(8, 6))
-plt.plot(fpr, tpr, color='darkorange', lw=2, label='Curva ROC')
-plt.plot([1, 1], [1, 1], color='navy', lw=2, linestyle='--')
-plt.xlabel('Tasa de Falsos Positivos')
-plt.ylabel('Tasa de Verdaderos Positivos')
-plt.title('Curva ROC para SVM (hipertensión)')
-plt.legend(loc='lower right')
-plt.show()
 
 #-----------------------------------------------------------------------------------
 
-# Crear y entrenar el modelo SVM para diabetes
-svm_diabe = SVC(kernel='linear', probability=True)  # Puedes ajustar el kernel según sea necesario
-svm_diabe.fit(X_train_scaled_diabe, y_train_Diabe)
+# # Crear y entrenar el modelo KNN para diabetes
+# knn_diabe = KNeighborsClassifier(n_neighbors=5)  # Puedes ajustar el número de vecinos según sea necesario
+# knn_diabe.fit(X_train_scaled_diabe, y_train_Diabe)
 
-# Realizar predicciones y evaluar el rendimiento para diabetes
-y_pred_diabe_svm = svm_diabe.predict(X_test_scaled_diabe)
-y_prob_diabe_svm = svm_diabe.predict_proba(X_test_scaled_diabe)[:, 1]  # Probabilidad de clase positiva
+# # Realizar predicciones y evaluar el rendimiento para diabetes
+# y_pred_diabe_knn = knn_diabe.predict(X_test_scaled_diabe)
+# y_prob_diabe_knn = knn_diabe.predict_proba(X_test_scaled_diabe)[:, 1]  # Probabilidad de clase positiva
 
-accuracy_diabe_svm = accuracy_score(y_test_Diabe, y_pred_diabe_svm)
-precision_diabe_svm = precision_score(y_test_Diabe, y_pred_diabe_svm)
-recall_diabe_svm = recall_score(y_test_Diabe, y_pred_diabe_svm)
-roc_auc_diabe_svm = roc_auc_score(y_test_Diabe, y_pred_diabe_svm)
+# accuracy_diabe_knn = accuracy_score(y_test_Diabe, y_pred_diabe_knn)
+# precision_diabe_knn = precision_score(y_test_Diabe, y_pred_diabe_knn)
+# recall_diabe_knn = recall_score(y_test_Diabe, y_pred_diabe_knn)
+# roc_auc_diabe_knn = roc_auc_score(y_test_Diabe, y_pred_diabe_knn)
 
-print("Rendimiento del modelo SVM para diabetes:")
-print("Accuracy:", accuracy_diabe_svm)
-print("Precision:", precision_diabe_svm)
-print("Recall:", recall_diabe_svm)
-print("ROC AUC:", roc_auc_diabe_svm)
+# print("Rendimiento del modelo KNN para diabetes:")
+# print("Accuracy:", accuracy_diabe_knn)
+# print("Precision:", precision_diabe_knn)
+# print("Recall:", recall_diabe_knn)
+# print("ROC AUC:", roc_auc_diabe_knn)
 
-# Visualizar la curva ROC
-fpr, tpr, _ = roc_curve(y_test_Diabe, y_prob_diabe_svm)
-plt.figure(figsize=(8, 6))
-plt.plot(fpr, tpr, color='darkorange', lw=2, label='Curva ROC')
-plt.plot([1, 1], [1, 1], color='navy', lw=2, linestyle='--')
-plt.xlabel('Tasa de Falsos Positivos')
-plt.ylabel('Tasa de Verdaderos Positivos')
-plt.title('Curva ROC para SVM (diabetes)')
-plt.legend(loc='lower right')
-plt.show()
+# # Visualizar la curva ROC
+# fpr, tpr, _ = roc_curve(y_test_Diabe, y_prob_diabe_knn)
+# plt.figure(figsize=(8, 6))
+# plt.plot(fpr, tpr, color='darkorange', lw=2, label='Curva ROC')
+# plt.plot([1, 1], [1, 1], color='navy', lw=2, linestyle='--')
+# plt.xlabel('Tasa de Falsos Positivos')
+# plt.ylabel('Tasa de Verdaderos Positivos')
+# plt.title('Curva ROC para KNN (diabetes)')
+# plt.legend(loc='lower right')
+# plt.show()
 
-#-----------------------------------------------------------------------------------
-# Crear un modelo de Random Forest
-random_forest_hiper = RandomForestClassifier(n_estimators=100, random_state=42)  # Puedes ajustar los parámetros según sea necesario
+# #-----------------------------------------------------------------------------------
+# # Crear un modelo de SVM
+# svm_hiper = SVC(kernel='linear', probability=True)  # Puedes ajustar el kernel según sea necesario
 
-# Entrenar el modelo con los datos de entrenamiento
-random_forest_hiper.fit(X_train_scaled_hiper, y_train_hiper)
-# Realizar predicciones en el conjunto de prueba
-y_pred_hiper_rf = random_forest_hiper.predict(X_test_scaled_hiper)
-y_prob_hiper_rf = random_forest_hiper.predict_proba(X_test_scaled_hiper)[:, 1]  # Probabilidad de clase positiva
+# # Entrenar el modelo con los datos de entrenamiento escalados
+# svm_hiper.fit(X_train_scaled_hiper, y_train_hiper)
 
-# Evaluar el rendimiento del modelo
-accuracy_hiper_rf = accuracy_score(y_test_hiper, y_pred_hiper_rf)
-precision_hiper_rf = precision_score(y_test_hiper, y_pred_hiper_rf)
-recall_hiper_rf = recall_score(y_test_hiper, y_pred_hiper_rf)
-roc_auc_hiper_rf = roc_auc_score(y_test_hiper, y_pred_hiper_rf)
+# # Realizar predicciones en el conjunto de prueba
+# y_pred_hiper_svm = svm_hiper.predict(X_test_scaled_hiper)
+# y_prob_hiper_svm = svm_hiper.predict_proba(X_test_scaled_hiper)[:, 1]  # Probabilidad de clase positiva
 
-print("Rendimiento del modelo Random Forest para hipertensión:")
-print("Accuracy:", accuracy_hiper_rf)
-print("Precision:", precision_hiper_rf)
-print("Recall:", recall_hiper_rf)
-print("ROC AUC:", roc_auc_hiper_rf)
+# # Evaluar el rendimiento del modelo
+# accuracy_hiper_svm = accuracy_score(y_test_hiper, y_pred_hiper_svm)
+# precision_hiper_svm = precision_score(y_test_hiper, y_pred_hiper_svm)
+# recall_hiper_svm = recall_score(y_test_hiper, y_pred_hiper_svm)
+# roc_auc_hiper_svm = roc_auc_score(y_test_hiper, y_pred_hiper_svm)
 
-# Visualizar la curva ROC
-fpr, tpr, _ = roc_curve(y_test_hiper, y_prob_hiper_rf)
-plt.figure(figsize=(8, 6))
-plt.plot(fpr, tpr, color='darkorange', lw=2, label='Curva ROC')
-plt.plot([1, 1], [1, 1], color='navy', lw=2, linestyle='--')
-plt.xlabel('Tasa de Falsos Positivos')
-plt.ylabel('Tasa de Verdaderos Positivos')
-plt.title('Curva ROC para Random Forest (hipertensión)')
-plt.legend(loc='lower right')
-plt.show()
+# print("Rendimiento del modelo SVM para hipertensión:")
+# print("Accuracy:", accuracy_hiper_svm)
+# print("Precision:", precision_hiper_svm)
+# print("Recall:", recall_hiper_svm)
+# print("ROC AUC:", roc_auc_hiper_svm)
 
-#-----------------------------------------------------------------------------------
+# # Visualizar la curva ROC
+# fpr, tpr, _ = roc_curve(y_test_hiper, y_prob_hiper_svm)
+# plt.figure(figsize=(8, 6))
+# plt.plot(fpr, tpr, color='darkorange', lw=2, label='Curva ROC')
+# plt.plot([1, 1], [1, 1], color='navy', lw=2, linestyle='--')
+# plt.xlabel('Tasa de Falsos Positivos')
+# plt.ylabel('Tasa de Verdaderos Positivos')
+# plt.title('Curva ROC para SVM (hipertensión)')
+# plt.legend(loc='lower right')
+# plt.show()
 
-# Crear y entrenar el modelo Random Forest para diabetes
-random_forest_diabe = RandomForestClassifier(n_estimators=100, random_state=42)  # Puedes ajustar los parámetros según sea necesario
-random_forest_diabe.fit(X_train_scaled_diabe, y_train_Diabe)
+# #-----------------------------------------------------------------------------------
 
-# Realizar predicciones y evaluar el rendimiento para diabetes
-y_pred_diabe_rf = random_forest_diabe.predict(X_test_scaled_diabe)
-y_prob_diabe_rf = random_forest_diabe.predict_proba(X_test_scaled_diabe)[:, 1]  # Probabilidad de clase positiva
+# # Crear y entrenar el modelo SVM para diabetes
+# svm_diabe = SVC(kernel='linear', probability=True)  # Puedes ajustar el kernel según sea necesario
+# svm_diabe.fit(X_train_scaled_diabe, y_train_Diabe)
 
-accuracy_diabe_rf = accuracy_score(y_test_Diabe, y_pred_diabe_rf)
-precision_diabe_rf = precision_score(y_test_Diabe, y_pred_diabe_rf)
-recall_diabe_rf = recall_score(y_test_Diabe, y_pred_diabe_rf)
-roc_auc_diabe_rf = roc_auc_score(y_test_Diabe, y_pred_diabe_rf)
+# # Realizar predicciones y evaluar el rendimiento para diabetes
+# y_pred_diabe_svm = svm_diabe.predict(X_test_scaled_diabe)
+# y_prob_diabe_svm = svm_diabe.predict_proba(X_test_scaled_diabe)[:, 1]  # Probabilidad de clase positiva
 
-print("Rendimiento del modelo Random Forest para diabetes:")
-print("Accuracy:", accuracy_diabe_rf)
-print("Precision:", precision_diabe_rf)
-print("Recall:", recall_diabe_rf)
-print("ROC AUC:", roc_auc_diabe_rf)
+# accuracy_diabe_svm = accuracy_score(y_test_Diabe, y_pred_diabe_svm)
+# precision_diabe_svm = precision_score(y_test_Diabe, y_pred_diabe_svm)
+# recall_diabe_svm = recall_score(y_test_Diabe, y_pred_diabe_svm)
+# roc_auc_diabe_svm = roc_auc_score(y_test_Diabe, y_pred_diabe_svm)
 
-# Visualizar la curva ROC
-fpr, tpr, _ = roc_curve(y_test_Diabe, y_prob_diabe_rf)
-plt.figure(figsize=(8, 6))
-plt.plot(fpr, tpr, color='darkorange', lw=2, label='Curva ROC')
-plt.plot([1, 1], [1, 1], color='navy', lw=2, linestyle='--')
-plt.xlabel('Tasa de Falsos Positivos')
-plt.ylabel('Tasa de Verdaderos Positivos')
-plt.title('Curva ROC para Random Forest (diabetes)')
-plt.legend(loc='lower right')
-plt.show()
+# print("Rendimiento del modelo SVM para diabetes:")
+# print("Accuracy:", accuracy_diabe_svm)
+# print("Precision:", precision_diabe_svm)
+# print("Recall:", recall_diabe_svm)
+# print("ROC AUC:", roc_auc_diabe_svm)
+
+# # Visualizar la curva ROC
+# fpr, tpr, _ = roc_curve(y_test_Diabe, y_prob_diabe_svm)
+# plt.figure(figsize=(8, 6))
+# plt.plot(fpr, tpr, color='darkorange', lw=2, label='Curva ROC')
+# plt.plot([1, 1], [1, 1], color='navy', lw=2, linestyle='--')
+# plt.xlabel('Tasa de Falsos Positivos')
+# plt.ylabel('Tasa de Verdaderos Positivos')
+# plt.title('Curva ROC para SVM (diabetes)')
+# plt.legend(loc='lower right')
+# plt.show()
+
+# #-----------------------------------------------------------------------------------
+# # Crear un modelo de Random Forest
+# random_forest_hiper = RandomForestClassifier(n_estimators=100, random_state=42)  # Puedes ajustar los parámetros según sea necesario
+
+# # Entrenar el modelo con los datos de entrenamiento
+# random_forest_hiper.fit(X_train_scaled_hiper, y_train_hiper)
+# # Realizar predicciones en el conjunto de prueba
+# y_pred_hiper_rf = random_forest_hiper.predict(X_test_scaled_hiper)
+# y_prob_hiper_rf = random_forest_hiper.predict_proba(X_test_scaled_hiper)[:, 1]  # Probabilidad de clase positiva
+
+# # Evaluar el rendimiento del modelo
+# accuracy_hiper_rf = accuracy_score(y_test_hiper, y_pred_hiper_rf)
+# precision_hiper_rf = precision_score(y_test_hiper, y_pred_hiper_rf)
+# recall_hiper_rf = recall_score(y_test_hiper, y_pred_hiper_rf)
+# roc_auc_hiper_rf = roc_auc_score(y_test_hiper, y_pred_hiper_rf)
+
+# print("Rendimiento del modelo Random Forest para hipertensión:")
+# print("Accuracy:", accuracy_hiper_rf)
+# print("Precision:", precision_hiper_rf)
+# print("Recall:", recall_hiper_rf)
+# print("ROC AUC:", roc_auc_hiper_rf)
+
+# # Visualizar la curva ROC
+# fpr, tpr, _ = roc_curve(y_test_hiper, y_prob_hiper_rf)
+# plt.figure(figsize=(8, 6))
+# plt.plot(fpr, tpr, color='darkorange', lw=2, label='Curva ROC')
+# plt.plot([1, 1], [1, 1], color='navy', lw=2, linestyle='--')
+# plt.xlabel('Tasa de Falsos Positivos')
+# plt.ylabel('Tasa de Verdaderos Positivos')
+# plt.title('Curva ROC para Random Forest (hipertensión)')
+# plt.legend(loc='lower right')
+# plt.show()
+
+# #-----------------------------------------------------------------------------------
+
+# # Crear y entrenar el modelo Random Forest para diabetes
+# random_forest_diabe = RandomForestClassifier(n_estimators=100, random_state=42)  # Puedes ajustar los parámetros según sea necesario
+# random_forest_diabe.fit(X_train_scaled_diabe, y_train_Diabe)
+
+# # Realizar predicciones y evaluar el rendimiento para diabetes
+# y_pred_diabe_rf = random_forest_diabe.predict(X_test_scaled_diabe)
+# y_prob_diabe_rf = random_forest_diabe.predict_proba(X_test_scaled_diabe)[:, 1]  # Probabilidad de clase positiva
+
+# accuracy_diabe_rf = accuracy_score(y_test_Diabe, y_pred_diabe_rf)
+# precision_diabe_rf = precision_score(y_test_Diabe, y_pred_diabe_rf)
+# recall_diabe_rf = recall_score(y_test_Diabe, y_pred_diabe_rf)
+# roc_auc_diabe_rf = roc_auc_score(y_test_Diabe, y_pred_diabe_rf)
+
+# print("Rendimiento del modelo Random Forest para diabetes:")
+# print("Accuracy:", accuracy_diabe_rf)
+# print("Precision:", precision_diabe_rf)
+# print("Recall:", recall_diabe_rf)
+# print("ROC AUC:", roc_auc_diabe_rf)
+
+# # Visualizar la curva ROC
+# fpr, tpr, _ = roc_curve(y_test_Diabe, y_prob_diabe_rf)
+# plt.figure(figsize=(8, 6))
+# plt.plot(fpr, tpr, color='darkorange', lw=2, label='Curva ROC')
+# plt.plot([1, 1], [1, 1], color='navy', lw=2, linestyle='--')
+# plt.xlabel('Tasa de Falsos Positivos')
+# plt.ylabel('Tasa de Verdaderos Positivos')
+# plt.title('Curva ROC para Random Forest (diabetes)')
+# plt.legend(loc='lower right')
+# plt.show()
 
 #-----------------------------------------------------------------------------------
