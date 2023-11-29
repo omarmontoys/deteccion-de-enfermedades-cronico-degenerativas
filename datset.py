@@ -55,7 +55,19 @@ dfFinalNull = df1_selected.dropna()
 
 print("DataFrame después de dropna:")
 print(dfFinalNull)
-dfFinalNull.to_csv('dfFloat.csv', index=False)
+
+# Filtrar las filas donde 'a0401' no es igual a 2
+dfIpertencion = dfFinalNull[dfFinalNull['a0401'] != 2]
+
+# Mostrar el conjunto de datos después del filtro
+print("Dataset Nuevo después de filtrar el valor 2 en 'a0401':")
+print(dfIpertencion)
+dfDiabetes = dfFinalNull[dfFinalNull['a0301'] != 2]
+
+# Mostrar el conjunto de datos después del filtro
+print("Dataset Nuevo después de filtrar el valor 2 en 'a0301':")
+print(dfDiabetes)
+#dfFinalNull.to_csv('dfFloat.csv', index=False)
 
 
 # Eliminar filas duplicadas basándose en todas las columnas
@@ -64,10 +76,15 @@ dfFinalNull.to_csv('dfFloat.csv', index=False)
 #print(df_sin_duplicados)
 # Reemplazar comas por puntos en las columnas relevantes
 columns_to_replace_commas = [ 'a0401', 'a0301', 'h0302', 'h0303', 'fa0400', 'fa0407h', 'an09', 'an30', 'an03']
-dfFinalNull[columns_to_replace_commas] = dfFinalNull[columns_to_replace_commas].replace({',': '.'}, regex=True)
+dfIpertencion[columns_to_replace_commas] = dfIpertencion[columns_to_replace_commas].replace({',': '.'}, regex=True)
 
 # Convertir las columnas relevantes a números de punto flotante
-dfFloat = dfFinalNull
+dfFloat = dfIpertencion
+# columns_to_replace_commas = [ 'a0401', 'a0301', 'h0302', 'h0303', 'fa0400', 'fa0407h', 'an09', 'an30', 'an03']
+# dfDiabetes[columns_to_replace_commas] = dfDiabetes[columns_to_replace_commas].replace({',': '.'}, regex=True)
+
+# # Convertir las columnas relevantes a números de punto flotante
+# dfFloat = dfDiabetes
 
 #-----------------------------------------------------------------------------------
 # Calculamos la matriz de correlacion

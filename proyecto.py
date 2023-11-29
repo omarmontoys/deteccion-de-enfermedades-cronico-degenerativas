@@ -10,10 +10,6 @@ from sklearn.impute import KNNImputer, SimpleImputer
 
 # Simbologia 
 
-# valor_COL_HDL   --------------------------------  Colesteron	
-# valor_GLU_SUERO --------------------------------  Glucosa
-# valor_VIT_B12	  --------------------------------  Vitamina B12
-# valor_VIT_D	  --------------------------------  Vitamina D
 # an09            --------------------------------  Medicion de la cintura
 # an30            --------------------------------  Tension Arterial
 # an03            --------------------------------  Medicion de Peso y ropa puesta.
